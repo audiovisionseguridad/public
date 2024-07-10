@@ -9,12 +9,13 @@ sudo apt install git wget
 cd /opt/adv/ || { echo "Failed to change directory to /opt/adv/. Exiting."; exit 1; }
 docker-compose stop adv-qr-node-rs485
 
-wget -qO- https://raw.githubusercontent.com/audiovisionseguridad/public/master/99-hidraw-permissions.rules | sudo tee /etc/udev/rules.d/99-hidraw-permissions.rules
-sudo udevadm control --reload-rules && sudo udevadm trigger
 
 echo "blacklist ch341" | sudo tee -a "/etc/modprobe.d/blacklist-ch341.conf" > /dev/null
 echo "ajustando driver"
 sudo update-initramfs -u
+
+wget -qO- https://raw.githubusercontent.com/audiovisionseguridad/public/master/99-hidraw-permissions.rules | sudo tee /etc/udev/rules.d/99-hidraw-permissions.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
 
 git clone https://github.com/WCHSoftGroup/ch341ser_linux || echo "repo OK"
 cd ch341ser_linux/driver
