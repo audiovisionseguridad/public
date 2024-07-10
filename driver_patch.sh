@@ -5,9 +5,12 @@ if [[ $EUID -ne 0 ]]; then
    exec sudo "$0" "$@"
    exit $?
 fi
-sudo apt install git
+sudo apt install git curl wget
 cd /opt/adv/ || { echo "Failed to change directory to /opt/adv/. Exiting."; exit 1; }
 docker-compose stop adv-qr-node-rs485
+
+wget -qO- https://raw.githubusercontent.com/audiovisionseguridad/public/master/99-hidraw-permissions.rules | sudo tee /etc/udev/rules.d/99-hidraw-permissions.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
 
 echo "blacklist ch341" | sudo tee -a "/etc/modprobe.d/blacklist-ch341.conf" > /dev/null
 echo "ajustando driver"
