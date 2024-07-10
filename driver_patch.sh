@@ -11,7 +11,7 @@ docker-compose stop adv-qr-node-rs485
 
 echo "blacklist ch341" | sudo tee -a "/etc/modprobe.d/blacklist-ch341.conf" > /dev/null
 echo "ajustando driver"
-#sudo update-initramfs -u
+sudo update-initramfs -u
 
 git clone https://github.com/WCHSoftGroup/ch341ser_linux || echo "repo OK"
 cd ch341ser_linux/driver
