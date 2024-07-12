@@ -5,7 +5,7 @@ if [[ $EUID -ne 0 ]]; then
    exec sudo "$0" "$@"
    exit $?
 fi
-sudo apt install git wget
+sudo apt -y install git wget
 cd /opt/adv/ || { echo "Failed to change directory to /opt/adv/. Exiting."; exit 1; }
 docker-compose stop adv-qr-node-rs485
 
