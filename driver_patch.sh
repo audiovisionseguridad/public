@@ -15,7 +15,8 @@ cd /opt/adv/ || { echo "Failed to change directory to /opt/adv/. Exiting."; exit
 docker-compose stop adv-qr-node-rs485
 
 
-echo "blacklist ch341" | sudo tee -a "/etc/modprobe.d/blacklist-ch341.conf" > /dev/null
+echo "blacklist ch341" | sudo tee "/etc/modprobe.d/blacklist-ch341.conf" > /dev/null
+
 echo "ajustando driver"
 sudo update-initramfs -u
 
