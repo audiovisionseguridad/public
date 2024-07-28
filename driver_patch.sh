@@ -19,7 +19,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 git clone https://github.com/WCHSoftGroup/ch341ser_linux || echo "repo OK"
 cd ch341ser_linux/driver
-make
+sudo make
 sudo make load 
 
 cat << EOF > /etc/systemd/system/load-ch341.service
@@ -37,6 +37,6 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 EOF
 
-systemctl enable load-ch341.service
-systemctl start load-ch341.service || echo "OK"
+sudo systemctl enable load-ch341.service
+sudo systemctl start load-ch341.service || echo "OK"
 echo "OK"
