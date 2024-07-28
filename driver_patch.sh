@@ -1,5 +1,10 @@
 #!/bin/bash
 
+export DOCKER_HOST=tcp://127.0.0.1:2376;
+export DOCKER_TLS_VERIFY=1;
+export COMPOSE_TLS_VERSION=TLSv1_2;
+
+
 if [[ $EUID -ne 0 ]]; then
    echo "Necesita correr con privilegios..."
    exec sudo "$0" "$@"
@@ -39,4 +44,7 @@ EOF
 
 sudo systemctl enable load-ch341.service
 sudo systemctl start load-ch341.service || echo "OK"
+docker-compose start
+adv-qr-node-rs485
+
 echo "OK"
