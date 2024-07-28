@@ -44,7 +44,6 @@ EOF
 
 sudo systemctl enable load-ch341.service
 sudo systemctl start load-ch341.service || echo "OK"
-docker-compose start
-adv-qr-node-rs485
+docker-compose start adv-qr-node-rs485
 
 echo "OK"
