@@ -24,7 +24,9 @@ wget -qO- https://raw.githubusercontent.com/audiovisionseguridad/public/master/9
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
 git clone https://github.com/WCHSoftGroup/ch341ser_linux || echo "repo OK"
-cd ch341ser_linux/driver
+cd /opt/adv/ch341ser_linux/driver || { echo "Failed to change directory to /opt/adv/ch341ser_linux/driver. Exiting."; exit 1; }
+
+sudo make clean
 sudo make
 sudo make load 
 
@@ -42,6 +44,8 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 EOF
+
+cd /opt/adv/ || { echo "Failed to change directory to /opt/adv/. Exiting."; exit 1; }
 
 sudo systemctl enable load-ch341.service
 sudo systemctl start load-ch341.service || echo "OK"
